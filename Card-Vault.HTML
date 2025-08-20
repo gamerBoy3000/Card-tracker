@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rayirth's Card Vault</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { color: #333; }
+    input, select, button { margin: 5px; padding: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Rayirth's Card Vault 🃏</h1>
+  <div>
+    <input type="text" id="name" placeholder="Card Name" />
+    <select id="sport">
+      <option>Basketball</option>
+      <option>Soccer</option>
+      <option>Pokémon</option>
+    </select>
+    <input type="text" id="rarity" placeholder="Rarity (e.g. RC, SR)" />
+    <input type="text" id="condition" placeholder="Condition (Mint, NM)" />
+    <input type="text" id="notes" placeholder="Notes (e.g. 'Brother-proofed')" />
+    <button onclick="addCard()">Add Card</button>
+  </div>
+
+  <table id="cardTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sport</th>
+        <th>Rarity</th>
+        <th>Condition</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const tableBody = document.querySelector("#cardTable tbody");
+
+    function addCard() {
+      const name = document.getElementById("name").value;
+      const sport = document.getElementById("sport").value;
+      const rarity = document.getElementById("rarity").value;
+      const condition = document.getElementById("condition").value;
+      const notes = document.getElementById("notes").value;
+
+      const card = { name, sport, rarity, condition, notes };
+      let cards = JSON.parse(localStorage.getItem("cards")) || [];
+      cards.push(card);
+      localStorage.setItem("cards", JSON.stringify(cards));
+      renderCards();
+    }
+
+    function renderCards() {
+      tableBody.innerHTML = "";
+      const cards = JSON.parse(localStorage.getItem("cards")) || [];
+      cards.forEach(card => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${card.name}</td>
+          <td>${card.sport}</td>
+          <td>${card.rarity}</td>
+          <td>${card.condition}</td>
+          <td>${card.notes}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    renderCards();
+  </script>
+</body>
+</html>

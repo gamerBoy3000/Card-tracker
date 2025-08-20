@@ -1,0 +1,27 @@
+/* style.css */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d5ce4;
+    padding: 20px;
+  }
+  h1 {
+    color: #e0eff4;
+  }
+  input, select, button {
+    margin: 5px;
+    padding: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  th {
+    background: #0d8151;
+  }
+  
